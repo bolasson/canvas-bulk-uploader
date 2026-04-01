@@ -1,12 +1,9 @@
-/* ── Canvas Batch Upload Panel ───────────────────────────────────────────────── */
-
 #cbu-panel {
   position: fixed;
   bottom: 28px;
   right: 28px;
   z-index: 99999;
   width: 320px;
-  /* Never taller than viewport minus some breathing room */
   max-height: calc(100vh - 48px);
   display: flex;
   flex-direction: column;
@@ -61,7 +58,6 @@
 }
 .cbu-collapse:hover { background: rgba(255,255,255,.32); }
 
-/* Body scrolls internally so the panel never overflows the screen */
 .cbu-body {
   padding: 14px;
   display: flex;
@@ -69,7 +65,7 @@
   gap: 10px;
   overflow-y: auto;
   flex: 1 1 auto;
-  min-height: 0; /* critical for flex children to shrink */
+  min-height: 0;
 }
 
 .cbu-hint {
@@ -106,7 +102,6 @@
   font-weight: 600;
 }
 
-/* File list: scrollable, grows to fill available space, capped so actions stay visible */
 .cbu-file-list {
   display: flex;
   flex-direction: column;
