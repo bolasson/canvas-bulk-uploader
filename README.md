@@ -42,13 +42,13 @@ Works on `*.instructure.com` (the platform that powers most Canvas installations
 "*://canvas.yourschool.edu/courses/*/assignments/*"
 ```
 
-> Note: By default, this extension is compaitable with Brigham Young University Provo
+> Note: By default, this extension is compaitable with Brigham Young University's version of Canvas.
 
 Then reload the extension at `chrome://extensions`.
 
 ## Disclaimer
 
-This is an unofficial third-party tool, not affiliated with or endorsed by Instructure or Canvas LMS or Brigham Young University Provo. It interacts with Canvas's submission form the same way a user would - no private APIs or credentials are accessed. Use at your own discretion.
+This is an unofficial third-party tool, not affiliated with or endorsed by Instructure or Canvas LMS or Brigham Young University. It interacts with Canvas's submission form the same way a user would - no private APIs or credentials are accessed. Use at your own discretion.
 
 ## License
 
