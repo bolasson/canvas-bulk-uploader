@@ -1,0 +1,201 @@
+/* ── Canvas Batch Upload Panel ───────────────────────────────────────────────── */
+
+#cbu-panel {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 99999;
+  width: 320px;
+  /* Never taller than viewport minus some breathing room */
+  max-height: calc(100vh - 48px);
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border: 1.5px solid #c0cfe0;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0,46,93,.15), 0 2px 8px rgba(0,46,93,.08);
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  font-size: 13px;
+  color: #1a2a3a;
+  user-select: none;
+  overflow: hidden;
+}
+
+.cbu-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 14px;
+  background: #002E5D;
+  color: #fff;
+  cursor: grab;
+  border-radius: 10px 10px 0 0;
+  flex-shrink: 0;
+}
+.cbu-header:active { cursor: grabbing; }
+
+
+
+.cbu-title {
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: .3px;
+  flex: 1;
+}
+
+.cbu-collapse {
+  background: rgba(255,255,255,.18);
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  line-height: 1;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  padding: 0;
+}
+.cbu-collapse:hover { background: rgba(255,255,255,.32); }
+
+/* Body scrolls internally so the panel never overflows the screen */
+.cbu-body {
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow-y: auto;
+  flex: 1 1 auto;
+  min-height: 0; /* critical for flex children to shrink */
+}
+
+.cbu-hint {
+  margin: 0;
+  color: #4a6080;
+  font-size: 12px;
+  line-height: 1.5;
+  flex-shrink: 0;
+}
+
+.cbu-drop-zone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 16px 12px;
+  border: 2px dashed #a0b8d0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: border-color .15s, background .15s;
+  background: #f4f7fb;
+  flex-shrink: 0;
+}
+.cbu-drop-zone:hover,
+.cbu-drop-zone.cbu-drag-over {
+  border-color: #002E5D;
+  background: #e8eef6;
+}
+.cbu-drop-zone input[type="file"] { display: none; }
+.cbu-drop-text {
+  font-size: 12px;
+  color: #3a5a80;
+  font-weight: 600;
+}
+
+/* File list: scrollable, grows to fill available space, capped so actions stay visible */
+.cbu-file-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  overflow-y: auto;
+  max-height: 240px;
+  flex-shrink: 1;
+}
+
+.cbu-file-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 8px;
+  background: #f0f4f9;
+  border-radius: 6px;
+  font-size: 12px;
+  flex-shrink: 0;
+}
+.cbu-file-name {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #1a2a3a;
+}
+.cbu-file-size {
+  color: #6a88a8;
+  flex-shrink: 0;
+  font-size: 11px;
+}
+.cbu-remove {
+  background: none;
+  border: none;
+  color: #8aaccb;
+  font-size: 15px;
+  cursor: pointer;
+  padding: 0 2px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+.cbu-remove:hover { color: #c0392b; }
+
+.cbu-status {
+  font-size: 12px;
+  padding: 7px 10px;
+  border-radius: 6px;
+  line-height: 1.4;
+  flex-shrink: 0;
+}
+.cbu-status--info    { background: #e8eef6; color: #002E5D; }
+.cbu-status--success { background: #ecfdf5; color: #065f46; }
+.cbu-status--warn    { background: #fffbeb; color: #92400e; }
+.cbu-status--error   { background: #fef2f2; color: #991b1b; }
+
+.cbu-actions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.cbu-btn {
+  flex: 1;
+  padding: 9px 0;
+  font-size: 13px;
+  font-weight: 700;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: background .15s, opacity .15s;
+  letter-spacing: .2px;
+}
+
+.cbu-btn:not(.cbu-btn--ghost) {
+  background: #002E5D;
+  color: #fff;
+}
+.cbu-btn:not(.cbu-btn--ghost):hover:not(:disabled) { background: #00234a; }
+
+.cbu-btn--ghost {
+  background: #fff;
+  color: #002E5D;
+  border: 1.5px solid #a0b8d0;
+  flex: 0 0 auto;
+  padding: 9px 14px;
+}
+.cbu-btn--ghost:hover { background: #f0f4f9; border-color: #002E5D; }
+
+.cbu-btn:disabled {
+  opacity: .4;
+  cursor: not-allowed;
+}
