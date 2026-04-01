@@ -49,12 +49,10 @@
     input.dispatchEvent(new Event('change', { bubbles: true }));
   }
 
-  // Get all current Canvas file inputs
   function getCanvasInputs() {
     return [...document.querySelectorAll('input[name^="attachments"][type="file"]')];
   }
 
-  // Remove a Canvas slot by its input element (clicks the remove link in its row)
   async function removeCanvasSlot(input) {
     const row = input.closest(
       '.submission_attachment, .attachment_field, [class*="attachment"], li, .file_input_row'
@@ -66,12 +64,10 @@
       removeBtn.click();
       await new Promise(r => setTimeout(r, 200));
     } else {
-      // Can't remove the slot (it's the last one), just blank it
       clearInput(input);
     }
   }
 
-  // Step 1: Remove any Canvas slots whose file is no longer in our panel list
   async function syncRemovals(panelNames) {
     const inputs = getCanvasInputs();
     for (const input of inputs) {
@@ -87,14 +83,11 @@
     activateFileTab();
     await new Promise(r => setTimeout(r, 400));
 
-    // Build set of names we want uploaded
     const panelNames = new Set(files.map(f => f.name));
 
-    // Step 1: remove Canvas slots for files no longer in our list
     await syncRemovals(panelNames);
     await new Promise(r => setTimeout(r, 200));
 
-    // Step 2: figure out which files still need uploading (not already in Canvas)
     const canvasInputs   = getCanvasInputs();
     const canvasNames    = new Set(canvasInputs.filter(i => i.files && i.files[0]).map(i => i.files[0].name));
     const filesToUpload  = files.filter(f => !canvasNames.has(f.name));
@@ -104,7 +97,6 @@
       return;
     }
 
-    // Make sure at least one input exists
     try {
       await waitForElement(
         '#submit_online_upload_form input[type="file"], input[name^="attachments"][type="file"]',
@@ -118,7 +110,6 @@
     let uploaded = 0;
 
     for (const file of filesToUpload) {
-      // Find an empty slot first
       const currentInputs = getCanvasInputs();
       const emptySlot = currentInputs.find(i => !i.files || i.files.length === 0);
 
@@ -126,7 +117,6 @@
         setFileOnInput(emptySlot, file);
         uploaded++;
       } else {
-        // No empty slots — add a new one
         const before = getCanvasInputs();
         const added  = clickAddAnotherFile();
         if (!added) {
@@ -187,7 +177,6 @@
 
     document.body.appendChild(panel);
 
-    // Collapse toggle
     let collapsed = false;
     panel.querySelector('.cbu-collapse').addEventListener('click', () => {
       collapsed = !collapsed;
@@ -195,7 +184,6 @@
       panel.querySelector('.cbu-collapse').textContent = collapsed ? '+' : '−';
     });
 
-    // Drag-to-move
     const header = panel.querySelector('.cbu-header');
     let dragging = false, ox = 0, oy = 0;
     header.addEventListener('mousedown', e => {
@@ -214,7 +202,6 @@
     });
     document.addEventListener('mouseup', () => { dragging = false; });
 
-    // File state
     let selectedFiles = [];
 
     function fileKey(f) { return `${f.name}::${f.size}::${f.lastModified}`; }
@@ -273,7 +260,6 @@
       addFiles(e.dataTransfer.files);
     });
 
-    // Clear All: just reload the page
     document.getElementById('cbu-clear-btn').addEventListener('click', () => {
       location.reload();
     });
