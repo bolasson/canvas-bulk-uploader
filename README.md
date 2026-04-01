@@ -1,6 +1,6 @@
 # Canvas Bulk Uploader
 
-A Chrome extension that lets you select files from multiple folders and upload them all at once to a Canvas assignment - no more clicking "Add Another File" over and over again.
+A browser extension that lets you select files from multiple folders and upload them all at once to a Canvas assignment - no more clicking "Add Another File" over and over again. Currently compatiable with Chrome and Edge.
 
 ## Features
 
@@ -14,16 +14,22 @@ A Chrome extension that lets you select files from multiple folders and upload t
 
 ## Installation
 
-This extension is not on the Chrome Web Store. You load it manually in developer mode - it takes about 3 minutes.
+This extension is currently not on the any web store. You load it manually in developer mode - it takes about 3 minutes.
 
 1. Download the ZIP from this repo and unzip it
-2. Open Chrome and go to `chrome://extensions`
-3. Toggle **Developer mode** on (top-right corner)
-4. Click **Load unpacked** (top-left corner)
-5. Select the unzipped `canvas-bulk-uploader` folder
-6. Then you're set to go!
+2. Open your browser and head to its extension page:
+   - Chrome: `chrome://extensions`
+   - Edge: `edge://extensions/`
+4. Toggle **Developer mode** on
+   - Chrome: top-right of page
+   - Edge: bottom-left of page
+5. Click **Load unpacked**
+   - Chrome: top-left of page
+   - Edge: top-middle of page
+7. Select the unzipped `canvas-bulk-uploader` folder
+8. Then you're set to go!
 
-To update when a new version is released, replace the folder contents and click the **↻** refresh icon on the extension card at `chrome://extensions`.
+To update when a new version is released, replace the folder contents and click the **↻** refresh icon on the extension card on your browser's extension page.
 
 ## Usage
 
